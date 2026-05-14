@@ -99,7 +99,7 @@ body::before {
   flex-shrink: 0;
 }
 @media (max-width: 400px) {
-  .app-title { font-size: 0.72rem; letter-spacing: 0.04em; gap: 4px; }
+  .app-title { font-size: 1.4rem; letter-spacing: 0.04em; gap: 4px; }
   .app-copy  { font-size: 0.62rem; }
   .utc-badge { font-size: 0.55rem; padding: 3px 7px; }
 }
@@ -1626,11 +1626,23 @@ const STORAGE_KEY = 'multihorario_state_v2';
 
 function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    const data = {
       clockCount: clockCount,
       selectedCities: selectedCities.slice(0, 6),
       hourFormat: hourFormat
-    }));
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+    // Guardar en CapacitorStorage para el widget nativo de Android
+    if (window.Capacitor && window.Capacitor.isNativePlatform()) {
+      const { Preferences } = window.Capacitor.Plugins;
+      if (Preferences) {
+        Preferences.set({
+          key: 'multihorario_state_v2',
+          value: JSON.stringify(data)
+        });
+      }
+    }
   } catch(e) {}
 }
 
