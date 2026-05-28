@@ -98,11 +98,35 @@ body::before {
   gap: 8px;
   flex-shrink: 0;
 }
-@media (max-width: 400px) {
-  .app-title { font-size: 1.0rem; letter-spacing: 0.04em; gap: 4px; }
-  .app-copy  { font-size: 0.62rem; }
-  .utc-badge { font-size: 0.55rem; padding: 3px 7px; }
-}
+    @media (max-width: 480px) {
+        .app-title {
+            font-size: 1.0rem;
+            letter-spacing: 0.04em;
+            gap: 4px;
+        }
+
+        .app-copy {
+            font-size: 0.62rem;
+        }
+
+        .utc-badge {
+            font-size: 0.55rem;
+            padding: 3px 7px;
+        }
+
+        .pill {
+            font-size: 0.45rem;
+            border-radius: 4px;
+        }
+
+        .count-pills {
+            gap: 2px;
+        }
+
+        .count-label {
+            font-size: 0.55rem;
+        }
+    }
 .app-title-dot {
   width: 8px; height: 8px;
   background: var(--accent);
